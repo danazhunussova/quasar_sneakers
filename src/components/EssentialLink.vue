@@ -46,3 +46,94 @@ const props = defineProps({
   }
 })
 </script>
+
+
+
+
+<!--
+<template>
+  <q-item
+    clickable
+    v-if="!props.dropdown"
+    tag="a"
+    target="_blank"
+    :href="props.link"
+  >
+    <q-item-section v-if="props.icon" avatar>
+      <q-icon :name="props.icon" color="blue-4" />
+    </q-item-section>
+
+    <q-item-section>
+      <q-item-label>{{ props.title }}</q-item-label>
+      <q-item-label caption>{{ props.caption }}</q-item-label>
+    </q-item-section>
+  </q-item>
+
+  <q-item
+    clickable
+    v-if="props.dropdown"
+    @click.stop="toggleDropdown"
+  >
+    <q-item-section v-if="props.icon" avatar>
+      <q-icon :name="props.icon" color="blue-4" />
+    </q-item-section>
+
+    <q-item-section>
+      <q-item-label>{{ props.title }}</q-item-label>
+      <q-item-label caption>{{ props.caption }}</q-item-label>
+    </q-item-section>
+  </q-item>
+
+  <q-list v-if="dropdownOpen">
+    <EssentialLink
+      v-for="(subItem, index) in props.dropdownItems"
+      :key="index"
+      v-bind="subItem"
+    />
+  </q-list>
+</template>
+
+<script setup>
+defineOptions({
+  name: 'EssentialLink'
+})
+
+const props = defineProps({
+  title: {
+    type: String,
+    required: true
+  },
+
+  caption: {
+    type: String,
+    default: ''
+  },
+
+  link: {
+    type: String,
+    default: '#'
+  },
+
+  icon: {
+    type: String,
+    default: ''
+  },
+
+  dropdown: {
+    type: Boolean,
+    default: false
+  },
+
+  dropdownItems: {
+    type: Array,
+    default: () => []
+  }
+})
+
+const dropdownOpen = ref(false);
+
+function toggleDropdown() {
+  dropdownOpen.value = !dropdownOpen.value;
+}
+</script>
+-->

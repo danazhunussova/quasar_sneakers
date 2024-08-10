@@ -12,7 +12,7 @@
           @click.stop="toggleLeftDrawer"
         />
         
-        <q-toolbar-title class="text-bold">Imbir App</q-toolbar-title>
+        <q-toolbar-title class="text-bold">Imbir App </q-toolbar-title>
 
         <!-- NOTIFICATIONS -->
 
@@ -109,9 +109,8 @@
       class="bg-blue-grey-1 "
     >
       <q-list>
-        <q-item-label
-          header
-        >
+
+        <q-item-label header>
           MENU
         </q-item-label>
 
@@ -132,7 +131,9 @@
 </template>
 
 <script setup>
-import { ref, nextTick} from 'vue'
+import { ref, computed } from 'vue';
+import { useRoute } from 'vue-router';
+
 import EssentialLink from 'components/EssentialLink.vue'
 
 defineOptions({
@@ -189,6 +190,12 @@ const linksList = [
     link: 'https://awesome.quasar.dev'
   },
   {
+    title: 'Help & Support',
+    caption: 'Community Quasar projects',
+    icon: 'help',
+    link: 'https://awesome.quasar.dev'
+  },
+  {
     title: 'Billing',
     caption: 'Community Quasar projects',
     icon: 'credit_score',
@@ -241,7 +248,6 @@ function goToSettings() {
 }
 
 function logout() {
-  // Implement your logout logic here
   menuOpen.value = false 
 }
 </script>
