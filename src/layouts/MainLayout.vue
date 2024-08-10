@@ -145,13 +145,47 @@ const linksList = [
     title: 'Staff',
     caption: 'quasar.dev',
     icon: 'business_center',
-    link: 'https://quasar.dev'
+    dropdown: true,
+    dropdownItems: [
+      {
+        title: 'User Settings',
+        caption: 'Manage user settings',
+        link: 'https://awesome.quasar.dev/user-settings',
+        icon: 'person'
+      },
+      {
+        title: 'App Settings',
+        caption: 'Manage app settings',
+        link: 'https://awesome.quasar.dev/app-settings',
+        icon: 'build'
+      }
+    ]
   },
   {
     title: 'Clients',
     caption: 'github.com/quasarframework',
     icon: 'group',
-    link: 'https://github.com/quasarframework'
+    dropdown: true,
+    dropdownItems: [
+      {
+        title: 'Client Database',
+        caption: 'Manage user settings',
+        link: 'https://awesome.quasar.dev/user-settings',
+        icon: 'person'
+      },
+      {
+        title: 'Client Categories',
+        caption: 'Manage app settings',
+        link: 'https://awesome.quasar.dev/app-settings',
+        icon: 'build'
+      },
+      {
+        title: 'Loyalty Program',
+        caption: 'Manage app settings',
+        link: 'https://awesome.quasar.dev/app-settings',
+        icon: 'build'
+      },
+    ]
   },
   {
     title: 'Analytics',
@@ -175,7 +209,26 @@ const linksList = [
     title: 'Inventory',
     caption: 'Community Quasar projects',
     icon: 'inventory',
-    link: 'https://awesome.quasar.dev'
+    dropdown: true,
+    dropdownItems: [
+      {
+        title: 'Storages',
+        link: 'https://awesome.quasar.dev/user-settings',
+        
+      },
+      {
+        title: 'Products',
+        
+        link: 'https://awesome.quasar.dev/app-settings',
+        
+      },
+      {
+        title: 'Bills of materials',
+        
+        link: 'https://awesome.quasar.dev/app-settings',
+        
+      },
+    ]
   },
   {
     title: 'Loyalty',
@@ -187,7 +240,21 @@ const linksList = [
     title: 'Settings',
     caption: 'Community Quasar projects',
     icon: 'settings',
-    link: 'https://awesome.quasar.dev'
+    dropdown: true,
+    dropdownItems: [
+      {
+        title: 'User Settings',
+        caption: 'Manage user settings',
+        link: 'https://awesome.quasar.dev/user-settings',
+        icon: 'person'
+      },
+      {
+        title: 'App Settings',
+        caption: 'Manage app settings',
+        link: 'https://awesome.quasar.dev/app-settings',
+        icon: 'build'
+      }
+    ]
   },
   {
     title: 'Help & Support',

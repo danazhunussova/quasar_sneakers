@@ -1,4 +1,4 @@
-<template>
+<!--<template>
   <q-item
     clickable
     tag="a"
@@ -46,11 +46,7 @@ const props = defineProps({
   }
 })
 </script>
-
-
-
-
-<!--
+-->
 <template>
   <q-item
     clickable
@@ -60,7 +56,7 @@ const props = defineProps({
     :href="props.link"
   >
     <q-item-section v-if="props.icon" avatar>
-      <q-icon :name="props.icon" color="blue-4" />
+      <q-icon :name="props.icon" color="cyan-10" />
     </q-item-section>
 
     <q-item-section>
@@ -73,27 +69,43 @@ const props = defineProps({
     clickable
     v-if="props.dropdown"
     @click.stop="toggleDropdown"
+    
   >
     <q-item-section v-if="props.icon" avatar>
-      <q-icon :name="props.icon" color="blue-4" />
+      <q-icon :name="props.icon" color="cyan-10" />
     </q-item-section>
 
-    <q-item-section>
+    <q-item-section >
       <q-item-label>{{ props.title }}</q-item-label>
-      <q-item-label caption>{{ props.caption }}</q-item-label>
+      
     </q-item-section>
+
+    <q-item-section side >
+      <q-icon
+            v-if="!dropdownOpen"
+            name="expand_more"
+            class="q-ml-xs"
+      />
+      <q-icon
+            v-else
+            name="expand_less"
+            class="q-ml-xs"
+      />
+    </q-item-section>
+    
   </q-item>
 
-  <q-list v-if="dropdownOpen">
+  <q-list v-if="dropdownOpen" class="bg-grey-1 q-px-sm" >
     <EssentialLink
       v-for="(subItem, index) in props.dropdownItems"
       :key="index"
-      v-bind="subItem"
+      v-bind="subItem" 
     />
   </q-list>
 </template>
 
 <script setup>
+import { ref, computed } from 'vue';
 defineOptions({
   name: 'EssentialLink'
 })
@@ -136,4 +148,3 @@ function toggleDropdown() {
   dropdownOpen.value = !dropdownOpen.value;
 }
 </script>
--->
