@@ -4,12 +4,12 @@
 
        <q-btn color="primary" class="bg-grey-9" @click="openAddCategoryDialog">Add Category</q-btn>
         
-        <div class="col q-py-md">
+        <div class="col q-py-sm">
           <q-col v-for="category in clientCategories" :key="category.name" >
-            <q-card class="q-my-sm">
+            <q-card class="q-my-sm " >
               <q-card-section class="flex justify-between items-center">
                 <div class="flex items-center">
-                  <q-icon name="circle" :color="category.color" />
+                  <q-icon name="square" class="shadow-5" style="opacity:50%" :color="category.color" />
                   <div class="text-h6 q-px-md">{{ category.name }}</div>
                 </div>
                 <q-card-actions @click="openEditCategoryDialog(category)">

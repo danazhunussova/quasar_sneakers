@@ -60,7 +60,7 @@ const props = defineProps({
     </q-item-section>
 
     <q-item-section>
-      <q-item-label>{{ props.title }}</q-item-label>
+      <q-item-label class="text-bold text-grey-14">{{ props.title }}</q-item-label>
       <q-item-label caption>{{ props.caption }}</q-item-label>
     </q-item-section>
   </q-item>
@@ -76,7 +76,7 @@ const props = defineProps({
     </q-item-section>
 
     <q-item-section >
-      <q-item-label>{{ props.title }}</q-item-label>
+      <q-item-label class="text-bold text-grey-14">{{ props.title }}</q-item-label>
       
     </q-item-section>
 
