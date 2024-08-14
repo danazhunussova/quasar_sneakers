@@ -154,14 +154,14 @@ export default {
 
     <div v-if="props.totalPrice===0" class="flex flex-center text-center items-center q-pa-xl" style="height:80%;" >
       <div  v-if="!orderId">
-        <q-img src="/package-icon.png" height="80px" width="80px"/>
+        <q-img :src="getBasePath + '/package-icon.png'" height="80px" width="80px"/>
         <div class="q-pa-md ">
           <b style="font-size:1.5rem">Корзина пустая</b>
           <p class="text-grey-7">Добавьте хотя бы 1 пару кроссовок, чтобы сделать заказ.</p>
         </div>
       </div>
       <div  v-if="orderId">
-        <q-img src="/order-success-icon.png"  width="80px"/>
+        <q-img :src="getBasePath + '/order-success-icon.png'"  width="80px"/>
         <div class="q-pa-md ">
           <b style="font-size:1.5rem">Заказ оформлен</b>
           <p class="text-grey-7">Ваш заказ №{{orderId}} скоро будет передан курьерской службе</p>
@@ -221,6 +221,9 @@ const orderId = ref(null)
 
   const cartIsEmpty = computed(()=>mycart.value.length===0)
   const buttonDisabled = computed(()=>isCreatingOrder.value || cartIsEmpty.value)
+  const getBasePath = computed(() => {
+  return import.meta.env.MODE === 'production' ? '/quasar_sneakers' : '';
+});
 
 watch(modelValue, (newVal) => {
   console.log("Drawer open:", newVal);

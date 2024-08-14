@@ -10,17 +10,17 @@
 
       <q-img :src="imageUrl" />
 
-      <div>
+      <div style="width:100%">
         <p class="q-mt-sm">{{title}}</p>
 
-        <div class="flex items-center justify-between q-mt-xs">
+        <div class="flex items-center justify-between q-mt-xs" >
                 <div class="q-gutter-xs">
                   <span class="text-grey-5">Price:  </span>
                   <b> {{price}} rub.</b>
                 </div>
               <q-img @click="onClickAdd"
                   :src=" getBasePath + (isAdded ? '/checked.svg' :'/plus.svg')"
-                  style="height: 2.5vw; max-width: 2.5vw"
+                  style="height: 25px; max-width: 25px"
               />
         </div>
 
