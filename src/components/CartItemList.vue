@@ -10,3 +10,4 @@
   @onClickRemove="()=>removeFromCart(item)"/>
 </div>
 </template>
+

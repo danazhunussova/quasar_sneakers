@@ -15,7 +15,7 @@
           </select>
 
           <div >
-            <img class="absolute q-mt-sm q-ml-xs" src="/search.svg" alt="Search">
+            <img class="absolute q-mt-sm q-ml-xs" :src="getBasePath + '/search.svg'" alt="Search">
             <input @change="onSearch" class="border border-red q-py-xs q-pl-lg" placeholder="Поиск" type="text" style="border:0.5px solid grey; border-radius: 5px">
           </div>
 
@@ -121,6 +121,10 @@ const onSearch = event => {
 
     }catch(err){console.log(err)}
   }
+
+const getBasePath = computed(() => {
+  return import.meta.env.MODE === 'production' ? '/quasar_sneakers' : '';
+});
 
   onMounted(async()=>{
     const localcart = localStorage.getItem('mycart')
