@@ -2,7 +2,8 @@
 
     <q-card class="my-card q-pa-md q-gutter-sm flex justify-between" style=" width: 250px;  height: 350px;">
       <q-img @click="onClickFav"
-      :src="isFav ? '/like-2.svg' :'/like-1.svg'"
+      :src="isFav ? (getBasePath + '/like-2.svg') :(getBasePath  + '/like-1.svg')"
+
       class="absolute q-mt-sm q-ml-sm "
       style="height: 30px; max-width: 30px; z-index:1"
       />
@@ -18,7 +19,7 @@
                   <b> {{price}} rub.</b>
                 </div>
               <q-img @click="onClickAdd"
-                  :src="isAdded ? '/checked.svg' :'/plus.svg'"
+                  :src=" getBasePath + (isAdded ? '/checked.svg' :'/plus.svg')"
                   style="height: 2.5vw; max-width: 2.5vw"
               />
         </div>
@@ -32,6 +33,8 @@
 </template>
 
 <script setup>
+
+import { computed } from 'vue';
 defineProps({
   isFav: Boolean,
   id: Number,
@@ -42,4 +45,8 @@ defineProps({
   onClickAdd: Function,
   onClickFav: Function
 })
+
+const getBasePath = computed(() => {
+  return import.meta.env.MODE === 'production' ? '/quasar_sneakers' : '';
+});
 </script>

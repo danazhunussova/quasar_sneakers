@@ -1,4 +1,6 @@
 <script setup>
+
+  import { computed } from 'vue';
   const emit = defineEmits(['onClickRemove'])
   defineProps({
     id:Number,
@@ -7,6 +9,10 @@
     price: Number
 
   })
+
+  const getBasePath = computed(() => {
+  return import.meta.env.MODE === 'production' ? '/quasar_sneakers' : '';
+});
 </script>
 <template>
   <div class="flex items-center q-py-md" style="border: 1px solid #ccc; border-radius: 8px; " >
@@ -15,7 +21,7 @@
       <p>{{title}}</p>
       <span class="flex items-center justify-between " style="width:100%">
         <b>{{price}} rub.</b>
-        <img class="q-mx-sm" @click="emit('onClickRemove')" src="/close.svg">
+        <img class="q-mx-sm" @click="emit('onClickRemove')" :src="getBasePath + '/close.svg'">
       </span>
 
     </div>
