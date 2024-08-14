@@ -1,134 +1,4 @@
-<template>
-  <q-layout view="hHh LpR lFf">
-    <q-header elevated class="bg-blue-grey ">
-      <q-toolbar>
-        
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Drawer"
-          @click.stop="toggleLeftDrawer"
-        />
-        
-        <q-toolbar-title class="text-bold">Imbir App </q-toolbar-title>
-
-        <!-- NOTIFICATIONS -->
-
-        <q-btn
-          flat
-          dense
-          round
-          icon="notifications"
-          aria-label="Notifications"
-          size="1.2rem"
-          @click.stop="toggleNotifications"
-        >
-          <q-badge
-            v-if="unreadCount > 0"
-            :label="unreadCount"
-            color="cyan-5"
-            align="top right"
-            class="q-mr-xs"
-          />
-        </q-btn>
-
-        <q-menu
-          v-model="notificationsOpen"
-          anchor="bottom right "
-          self="top right "
-          class="bg-white shadow-8 "
-          style="width: 300px;"
-          @hide="notificationsOpen = false"
-        >
-          <q-list>
-            <q-item v-for="(notification, index) in notifications" :key="index" clickable>
-              <q-item-section>
-                <q-item-label>{{ notification.message }}</q-item-label>
-                <q-item-label caption v-if="!notification.read">New</q-item-label>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </q-menu>
-
-
-        <!-- PROFILE -->
-        <q-btn
-              flat
-              dense
-              round
-              icon="account_circle"
-              aria-label="User Profile"
-              size="1.2rem"
-              @click.stop="toggleMenu"
-        />
-
-        <q-menu
-        v-model="menuOpen"
-        anchor="top right"
-          self="bottom right"
-        class="bg-white shadow-8 "
-        style="width: 170px;"
-        @hide="menuOpen = false"
-        
-        
-        >
-          <q-list>
-            <q-item clickable v-ripple @click="goToProfile">
-              <q-item-section avatar><q-icon name="person" /></q-item-section>
-              <q-item-section>Profile</q-item-section>
-            </q-item>
-
-            <q-item clickable v-ripple @click="goToSettings">
-              <q-item-section avatar><q-icon name="settings" /></q-item-section>
-              <q-item-section>Settings</q-item-section>
-            </q-item>
-
-            <q-item clickable v-ripple @click="logout">
-              <q-item-section avatar><q-icon name="logout" /></q-item-section>
-              <q-item-section>Logout</q-item-section>
-            </q-item>      
-          </q-list>
-        </q-menu>
-            
-          
-        
-      </q-toolbar>
-
-
-    </q-header>
-
-    
-
-    <q-drawer
-      side="left"
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      class="bg-blue-grey-1 "
-    >
-      <q-list>
-
-        <q-item-label header>
-          MENU
-        </q-item-label>
-
-        <EssentialLink
-          v-for="link in linksList"
-          :key="link.title"
-          v-bind="link"
-          
-        />
-      </q-list>
-    </q-drawer>
-
-    <q-page-container>
-      <router-view />
-      
-    </q-page-container>
-  </q-layout>
-</template>
+<!--
 
 <script setup>
 import { ref, computed } from 'vue';
@@ -214,19 +84,19 @@ const linksList = [
       {
         title: 'Storages',
         link: 'https://awesome.quasar.dev/user-settings',
-        
+
       },
       {
         title: 'Products',
-        
+
         link: 'https://awesome.quasar.dev/app-settings',
-        
+
       },
       {
         title: 'Bills of materials',
-        
+
         link: 'https://awesome.quasar.dev/app-settings',
-        
+
       },
     ]
   },
@@ -291,7 +161,7 @@ function toggleNotifications() {
     menuOpen.value = false; // Close profile menu if it's open
   }
   notificationsOpen.value = !notificationsOpen.value;
-  
+
 }
 
 function toggleMenu() {
@@ -299,14 +169,14 @@ function toggleMenu() {
     notificationsOpen.value = false;
   }
    menuOpen.value = !menuOpen.value
-  
+
 }
 
 function goToProfile() {
   // Navigate to the profile page
   // Add your router logic here, for example:
   // router.push('/profile')
-  menuOpen.value = false 
+  menuOpen.value = false
 }
 
 function goToSettings() {
@@ -315,6 +185,85 @@ function goToSettings() {
 }
 
 function logout() {
-  menuOpen.value = false 
+  menuOpen.value = false
 }
+</script>
+-->
+<template>
+
+<div>
+  <div class=" bg-light-green-1 " >
+
+
+    <q-layout view="lHh lpr lFf" container style="height: 100vh" >
+      <Drawer v-model="rightDrawerOpen" @close-drawer="toggleRightDrawer" :totalPrice="totalPrice"/>
+      <div class="shadow-2 rounded-borders bg-white">
+        <Header @toggle-drawer="toggleRightDrawer" :totalPrice="totalPrice"/>
+        <q-page-container>
+            <router-view />
+        </q-page-container>
+      </div>
+
+    </q-layout>
+  </div>
+</div>
+
+</template>
+
+
+<script setup>
+  import Header from "../components/Header.vue";
+  import Drawer from "../components/Drawer.vue";
+  import Cardlist from "../components/Cardlist.vue"
+
+  import { onMounted, watch, reactive, provide, computed, ref } from 'vue';
+  import axios from 'axios';
+
+  // Ref for controlling the right drawer state
+  const rightDrawerOpen = ref(false);
+
+  // Function to toggle the right drawer
+  function toggleRightDrawer() {
+
+    console.log('Toggling Drawer');
+    rightDrawerOpen.value = !rightDrawerOpen.value;
+    console.log(rightDrawerOpen.value);
+  }
+
+  const mycart = ref([]);
+  const totalPrice = computed (() => mycart.value.reduce((acc,item) =>acc+item.price, 0))
+
+  const addToCart = (item) => {
+    mycart.value.push(item)
+    item.isAdded = true
+  }
+  const removeFromCart = (item) => {
+    mycart.value.splice(mycart.value.indexOf(item),1)
+    item.isAdded = false
+  }
+
+  /*const createOrder = async() =>{
+    try{
+      isCreatingOrder.value = true
+      const {data} = await axios.post('https://6e5e12b4bb07b2b5.mokky.dev/orders',{
+        items: mycart.value,
+        totalPrice: totalPrice.value
+      })
+      mycart.value = []
+      return data;
+
+    } catch(err){console.log(err)}
+    finally{
+      isCreatingOrder.value=false
+    }
+  }
+*/
+
+
+  watch(mycart, ()=>{
+    localStorage.setItem('mycart', JSON.stringify(mycart.value))
+  },
+  {deep:true}
+  )
+  provide('mycart',{mycart,addToCart,removeFromCart})
 </script>

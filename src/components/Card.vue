@@ -1,0 +1,45 @@
+<template>
+
+    <q-card class="my-card q-pa-md q-gutter-sm flex justify-between" style=" width: 250px;  height: 350px;">
+      <q-img @click="onClickFav"
+      :src="isFav ? '/like-2.svg' :'/like-1.svg'"
+      class="absolute q-mt-sm q-ml-sm "
+      style="height: 30px; max-width: 30px; z-index:1"
+      />
+
+      <q-img :src="imageUrl" />
+
+      <div>
+        <p class="q-mt-sm">{{title}}</p>
+
+        <div class="flex items-center justify-between q-mt-xs">
+                <div class="q-gutter-xs">
+                  <span class="text-grey-5">Price:  </span>
+                  <b> {{price}} rub.</b>
+                </div>
+              <q-img @click="onClickAdd"
+                  :src="isAdded ? '/checked.svg' :'/plus.svg'"
+                  style="height: 2.5vw; max-width: 2.5vw"
+              />
+        </div>
+
+
+      </div>
+
+
+    </q-card>
+
+</template>
+
+<script setup>
+defineProps({
+  isFav: Boolean,
+  id: Number,
+  imageUrl: String,
+  title: String,
+  price: Number,
+  isAdded: Boolean,
+  onClickAdd: Function,
+  onClickFav: Function
+})
+</script>
