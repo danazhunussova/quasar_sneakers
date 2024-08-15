@@ -15,7 +15,7 @@
 });
 </script>
 <template>
-  <q-card class="flex items-center q-py-md " >
+  <q-card class="flex items-center q-py-md " style="width:100%" >
     <q-img :src="imageUrl" alt="" class="q-px-xs" style="width:30%;"/>
     <div class="flex col q-px-sm ">
       <p>{{title}}</p>
