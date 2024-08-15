@@ -124,7 +124,7 @@ export default {
 
       <div style="height:100%;" class="q-pa-md q-gutter-md">
             <div class="flex items-center q-gutter-md">
-                <q-icon @click="closeDrawer" name="arrow_back" color="grey-6" size="1.3rem"/>
+                <q-icon @click="closeDrawer" class="cursor-pointer" name="arrow_back" color="grey-6" size="1.3rem"/>
                 <q-item-label class="text-bold" style="font-size:1.3rem">Корзина</q-item-label>
             </div>
 
