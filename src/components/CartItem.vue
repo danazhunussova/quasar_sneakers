@@ -15,15 +15,15 @@
 });
 </script>
 <template>
-  <div class="flex items-center q-py-md" style="border: 1px solid #ccc; border-radius: 8px; " >
-    <img :src="imageUrl" alt="" class="q-px-xs" style="width:25%;">
+  <q-card class="flex items-center q-py-md " >
+    <q-img :src="imageUrl" alt="" class="q-px-xs" style="width:30%;"/>
     <div class="flex col q-px-sm ">
       <p>{{title}}</p>
       <span class="flex items-center justify-between " style="width:100%">
         <b>{{price}} rub.</b>
-        <img class="q-mx-sm" @click="emit('onClickRemove')" :src="getBasePath + '/close.svg'">
+        <img class="q-mx-sm" @click="emit('onClickRemove')" :src="getBasePath + '/close.svg'" style="width:23px">
       </span>
 
     </div>
-  </div>
+  </q-card>
 </template>

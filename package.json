@@ -20,9 +20,12 @@
   },
   "devDependencies": {
     "@quasar/app-vite": "^1.9.0",
+    "@testing-library/vue": "^8.1.0",
     "autoprefixer": "^10.4.2",
     "gh-pages": "^6.1.1",
-    "postcss": "^8.4.14"
+    "happy-dom": "^14.12.3",
+    "postcss": "^8.4.14",
+    "vitest": "^2.0.5"
   },
   "engines": {
     "node": "^20 || ^18 || ^16",

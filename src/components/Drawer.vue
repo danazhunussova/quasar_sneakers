@@ -120,57 +120,58 @@ export default {
     overlay
   >
 
-  <div style="height:100%;" class="q-pa-md q-gutter-md">
-        <div class="flex items-center q-gutter-md">
-            <q-icon @click="closeDrawer" name="arrow_back" color="grey-6" size="1.3rem"/>
-            <b style="font-size:1.3rem">Корзина</b>
-        </div>
+      <div style="height:100%;" class="q-pa-md q-gutter-md">
+            <div class="flex items-center q-gutter-md">
+                <q-icon @click="closeDrawer" name="arrow_back" color="grey-6" size="1.3rem"/>
+                <q-item-label class="text-bold" style="font-size:1.3rem">Корзина</q-item-label>
+            </div>
 
 
 
-      <div v-if="props.totalPrice" class="flex col q-mt-md " >
-        <CartItemList/>
+          <div v-if="props.totalPrice" class="flex col q-mt-lg " >
+            <CartItemList/>
 
-        <div style="width:100%"  class="q-my-lg ">
-          <div class="flex justify-between q-py-xs">
-            <span>Итого: </span>
-            <div class="flex-1"></div>
-            <b>{{props.totalPrice}} rub.</b>
+            <q-item-section style="width:100%"  class="q-my-lg ">
+              <q-item dense class="flex justify-between q-py-xs q-px-xs">
+                <span>Итого: </span>
+                <div class="flex-1"></div>
+                <b>{{props.totalPrice}} rub.</b>
+              </q-item>
+
+              <q-item dense class="flex justify-between q-py-xs q-px-xs">
+                <span>Налог (5%): </span>
+                <div class="flex-1"></div>
+                <b>{{(props.totalPrice*0.05).toFixed(0)}} rub.</b>
+              </q-item>
+
+              <q-btn @click="createOrder" :disabled="buttonDisabled" class="bg-light-green-6 q-py-sm text-white text-bold q-mt-md"  style="width:100%;">Оформить заказ</q-btn>
+
+            </q-item-section>
+
+
           </div>
 
-          <div class="flex justify-between q-py-xs">
-            <span>Налог (5%): </span>
-            <div class="flex-1"></div>
-            <b>{{(props.totalPrice*0.05).toFixed(0)}} rub.</b>
+
+        <q-item v-if="props.totalPrice===0" class="flex flex-center text-center items-center q-pa-xl" style="height:80%;" >
+          <div  v-if="!orderId">
+            <q-img :src="getBasePath + '/package-icon.png'" height="80px" width="80px"/>
+            <div class="q-pa-md ">
+              <b style="font-size:1.5rem">Корзина пустая</b>
+              <p class="text-grey-7">Добавьте хотя бы 1 пару кроссовок, чтобы сделать заказ.</p>
+            </div>
           </div>
 
-          <button @click="createOrder" :disabled="buttonDisabled" class="bg-light-green-6 q-py-md text-white cursor-pointer text-bold q-mt-md"  style="width:100%; border: 0px; border-radius:12px; ">Оформить заказ</button>
+          <div  v-if="orderId">
+            <q-img :src="getBasePath + '/order-success-icon.png'"  width="80px"/>
+            <div class="q-pa-md ">
+              <b style="font-size:1.5rem">Заказ оформлен</b>
+              <p class="text-grey-7">Ваш заказ №{{orderId}} скоро будет передан курьерской службе</p>
+            </div>
+          </div>
+        </q-item>
 
-        </div>
 
-
-    </div>
-
-
-    <div v-if="props.totalPrice===0" class="flex flex-center text-center items-center q-pa-xl" style="height:80%;" >
-      <div  v-if="!orderId">
-        <q-img :src="getBasePath + '/package-icon.png'" height="80px" width="80px"/>
-        <div class="q-pa-md ">
-          <b style="font-size:1.5rem">Корзина пустая</b>
-          <p class="text-grey-7">Добавьте хотя бы 1 пару кроссовок, чтобы сделать заказ.</p>
-        </div>
       </div>
-      <div  v-if="orderId">
-        <q-img :src="getBasePath + '/order-success-icon.png'"  width="80px"/>
-        <div class="q-pa-md ">
-          <b style="font-size:1.5rem">Заказ оформлен</b>
-          <p class="text-grey-7">Ваш заказ №{{orderId}} скоро будет передан курьерской службе</p>
-        </div>
-      </div>
-    </div>
-
-
-  </div>
 
   </q-drawer>
 </template>

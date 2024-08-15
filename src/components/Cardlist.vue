@@ -7,7 +7,7 @@
 </script>
 
 <template>
-        <div class=" q-gutter-md flex q-pb-xl items-center" >
+        <q-list class=" q-gutter-md flex q-pb-xl items-center" >
             <!--<Card
             image-url="/sneakers/sneakers-1.jpg"
             title="Sneakers for Men Nike Blazer Mid Suede"
@@ -29,6 +29,6 @@
             />
 
 
-      </div>
+      </q-list>
 </template>
 

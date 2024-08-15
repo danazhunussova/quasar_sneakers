@@ -1,6 +1,6 @@
 <template>
 
-    <q-card class="my-card q-pa-md q-gutter-sm flex justify-between" style=" width: 250px;  height: 350px;">
+    <q-card class="my-card q-pa-md q-gutter-sm flex justify-between flex-column " style=" width: 250px;  height: 320px;">
       <q-img @click="onClickFav"
       :src="isFav ? (getBasePath + '/like-2.svg') :(getBasePath  + '/like-1.svg')"
 
@@ -8,15 +8,15 @@
       style="height: 30px; max-width: 30px; z-index:1"
       />
 
-      <q-img :src="imageUrl" />
+      <q-img :src="imageUrl" style=" width: 220px;  height: 160px;"/>
 
-      <div style="width:100%">
-        <p class="q-mt-sm">{{title}}</p>
+     <div style="flex: 1;">
+        <q-item-label class="flex q-my-sm" >{{title}}</q-item-label>
 
-        <div class="flex items-center justify-between q-mt-xs" >
+        <div class="flex items-center justify-between q-mt-xs " >
                 <div class="q-gutter-xs">
-                  <span class="text-grey-5">Price:  </span>
-                  <b> {{price}} rub.</b>
+                  <q-item-label  class="text-grey-5">Price:</q-item-label>
+                  <q-item-label class="text-bold q-mb-none">{{ price }} rub.</q-item-label>
                 </div>
               <q-img @click="onClickAdd"
                   :src=" getBasePath + (isAdded ? '/checked.svg' :'/plus.svg')"
@@ -31,6 +31,7 @@
     </q-card>
 
 </template>
+
 
 <script setup>
 
