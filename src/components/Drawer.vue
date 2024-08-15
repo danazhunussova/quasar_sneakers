@@ -118,6 +118,8 @@ export default {
     :width="350"
     bordered
     overlay
+    show-if-above
+
   >
 
       <div style="height:100%;" class="q-pa-md q-gutter-md">
@@ -231,3 +233,4 @@ watch(modelValue, (newVal) => {
 });
 
 </script>
+

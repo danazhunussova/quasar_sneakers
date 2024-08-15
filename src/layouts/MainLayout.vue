@@ -196,8 +196,9 @@ function logout() {
 
 
     <q-layout view="lHh lpr lFf" container style="height: 100vh" >
-      <Drawer v-model="rightDrawerOpen" @close-drawer="toggleRightDrawer" :totalPrice="totalPrice"/>
-      <div class="shadow-2 rounded-borders bg-white">
+ <Drawer v-model="rightDrawerOpen" @close-drawer="toggleRightDrawer" :totalPrice="totalPrice" class="z-index: 9999;position: fixed;"/>
+
+     <div class="shadow-2 rounded-borders bg-white">
         <Header @toggle-drawer="toggleRightDrawer" :totalPrice="totalPrice"/>
         <q-page-container>
             <router-view />
@@ -267,3 +268,4 @@ function logout() {
   )
   provide('mycart',{mycart,addToCart,removeFromCart})
 </script>
+
