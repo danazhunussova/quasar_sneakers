@@ -19,12 +19,12 @@
               </q-item>
             </a>
 
-            <a :href="getBasePath + '#/favs'" style="text-decoration:none">
+            <router-link :to="getBasePath + '/favs'" style="text-decoration:none">
               <q-item class="flex items-center cursor-pointer q-px-md text-grey-7  q-gutter-xs hover:text-black">
                 <img :src="getBasePath + '/heart.svg'" alt="Heart">
                 <span >Favs</span>
               </q-item>
-            </a>
+            </router-link>
             <a @click="showDialog = true" >
               <q-item class="flex items-center cursor-pointer q-px-md text-grey-7  q-gutter-xs hover:text-black">
               <img :src="getBasePath + '/profile.svg'" alt="Profile">
