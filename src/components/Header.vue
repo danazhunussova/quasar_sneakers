@@ -2,7 +2,7 @@
   <q-header bordered class="bg-white text-primary  q-pa-md q-py-sm">
         <q-toolbar class="flex justify-between">
 
-          <a :href="getBasePath" style="text-decoration:none" class="router-link-active router-link-exact-active flex q-gutter-md items-center flex=row" aria-current="page">
+          <a :href="getBasePath" style="text-decoration:none" class="router-link-active router-link-exact-active flex q-gutter-md items-center flex-row" aria-current="page">
             <img :src="getBasePath + '/logo.png'" alt="Logo" style="height: 3vw; max-width: 3vw">
             <div style="text-decoration:none">
               <q-toolbar-title  class="text-uppercase  text-bold text-black"> Quasar Sneakers</q-toolbar-title>
