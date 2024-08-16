@@ -62,4 +62,5 @@ git push origin main
 /*
 npm run dev //this opens it in localhost...
 npm run build
+npm run deploy
 */
