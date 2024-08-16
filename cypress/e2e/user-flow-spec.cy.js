@@ -1,7 +1,8 @@
 describe('User Flow Test', () => {
   it('should allow a user to browse items, add to cart, and place an order', () => {
     // Visit the home page
-    cy.visit('http://localhost:9000/quasar_sneakers/#/');
+    //cy.visit('http://localhost:9000/quasar_sneakers/#/');
+    cy.visit('https://danazhunussova.github.io/quasar_sneakers/#/');
 
     cy.document().then(doc => {
       console.log(doc.documentElement.innerHTML);
