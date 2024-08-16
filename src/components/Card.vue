@@ -18,7 +18,7 @@
                   <q-item-label  class="text-grey-5">Price:</q-item-label>
                   <q-item-label class="text-bold q-mb-none">{{ price }} rub.</q-item-label>
                 </div>
-              <q-img @click="onClickAdd"
+              <q-img @click="onClickAdd" class="add-to-cart-button"
                   :src=" getBasePath + (isAdded ? '/checked.svg' :'/plus.svg')"
                   style="height: 25px; max-width: 25px"
               />

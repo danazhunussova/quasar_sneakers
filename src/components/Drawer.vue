@@ -146,7 +146,7 @@ export default {
                 <b>{{(props.totalPrice*0.05).toFixed(0)}} rub.</b>
               </q-item>
 
-              <q-btn @click="createOrder" :disabled="buttonDisabled" class="bg-light-green-6 q-py-sm text-white text-bold q-mt-md"  style="width:100%;">Оформить заказ</q-btn>
+              <q-btn @click="createOrder" :disabled="buttonDisabled" class="orderbutton bg-light-green-6 q-py-sm text-white text-bold q-mt-md"  style="width:100%;">Оформить заказ</q-btn>
 
             </q-item-section>
 
@@ -163,7 +163,7 @@ export default {
             </div>
           </div>
 
-          <div  v-if="orderId">
+          <div  v-if="orderId" class="orderconfirmation">
             <q-img :src="getBasePath + '/order-success-icon.png'"  width="80px"/>
             <div class="q-pa-md ">
               <b style="font-size:1.5rem">Заказ оформлен</b>

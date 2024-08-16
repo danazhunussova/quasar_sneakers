@@ -1,5 +1,5 @@
 <template>
-  <q-header bordered class="bg-white text-primary  q-pa-md q-py-sm">
+  <q-header bordered class="bg-white text-primary  q-pa-md q-py-sm ">
         <q-toolbar class="flex justify-between">
 
           <a :href="getBasePath + '#'" style="text-decoration:none" class="router-link-active router-link-exact-active flex q-gutter-md items-center flex-row" aria-current="page">
@@ -10,9 +10,9 @@
             </div>
           </a>
 
-          <q-list class="flex items-center ">
+          <q-list class="flex items-center header-navs">
 
-            <a @click="toggleDrawer">
+            <a @click="toggleDrawer" class="header-cart-button">
               <q-item class="flex items-center cursor-pointer q-px-md text-grey-7 hover:text-black q-gutter-xs">
                 <img :src="getBasePath + '/cart.svg'" alt="Cart"/>
                 <b>{{totalPrice}} rub</b>
