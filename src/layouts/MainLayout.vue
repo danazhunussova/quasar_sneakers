@@ -267,5 +267,6 @@ function logout() {
   {deep:true}
   )
   provide('mycart',{mycart,addToCart,removeFromCart})
+  
 </script>
 
