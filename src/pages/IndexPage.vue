@@ -1,170 +1,238 @@
 <template>
-  <q-page class="q-mx-xl">
-    <!-- heading -->
-    <div class="flex justify-between items-center">
-      <h4 class="text-bold">All Sneakers</h4>
-      <div class="flex q-gutter-md ">
-          <!--"{{ model }}"
-          <q-select style="min-width:140px" v-model="model" :options="options" emit-label map-options />
--->
+  <q-page
+    class="q-pa-xl page-background"
+    :class="{ 'sequence-start': typingAnimationDone }"
+  >
+    <div class="rozha-one">
+      <div
+        :style="{ color: '#6b0111' }"
+        class="text-h4 q-py-xl title-size monsieur-la-doulaise-regular"
+      >
+        Hey gorgeous!
+      </div>
+      <div class="typing-container">
+        <h6 ref="typingText" class="typing-text">
+          <span class="cursor">|</span>
+        </h6>
+      </div>
 
-          <!--<select @change="onChangeSelect" class="q-py-4 q-px-6 " style="min-width:200px; border:0.5px solid grey; border-radius: 5px">
-            <option value="name">По названию</option>
-            <option value="price">по цене (дешевые)</option>
-            <option value="-price">по цене (дорогие)</option>
-          </select>-->
+      <div class="text-h6 q-py-sm appear-animation delay-1 q-mt-lg">
+        <span :style="{ color: '#6b0111' }">💋 Here all the details ↓</span>
+      </div>
+      <div class="appear-animation delay-2">
+        <img src="../assets/mymemoji.png" alt="My Emoji" class="my-emoji" />
+      </div>
 
-          <q-select
-            v-model="filters.sortBy"
-            :options="sortOptions"
-            emit-value
-            map-options
-            dense
-            outlined
-            style="min-width:200px;"
-          />
-
-          <!--<div >
-            <img class="absolute q-mt-sm q-ml-xs" :src="getBasePath + '/search.svg'" alt="Search">
-            <input @change="onSearch" class="border border-red q-py-xs q-pl-lg" placeholder="Поиск" type="text" style="border:0.5px solid grey; border-radius: 5px">
-          </div>-->
-
-          <q-input
-            v-model="filters.searchQuery"
-            @input="onSearch"
-            placeholder="Поиск"
-            dense
-            outlined
-          >
-            <template v-slot:prepend>
-              <q-icon name="search" />
-            </template>
-          </q-input>
-
+      <div class="q-py-sm appear-animation delay-3">
+        <q-icon name="event" size="xs" class="q-mr-sm" />
+        <span>February 8th, 6:00PM</span>
+      </div>
+      <div class="q-py-sm appear-animation delay-4">
+        <q-icon name="place" size="xs" class="q-mr-sm" />
+        <span>Gasteria, Turan 22/1</span>
       </div>
     </div>
-    <!-- cardlist -->
-    <Cardlist :items="items" @add-to-fav="addToFav" @add-to-cart="onClickAddPlus"/>
+
+    <div class="q-my-sm appear-animation delay-5">
+      <q-btn
+        class="full-width"
+        flat
+        :style="{ backgroundColor: '#6b0111', color: 'white' }"
+        label="Add to Google Calendar"
+        @click="addToCalendar"
+      />
+    </div>
+    <div class="q-my-sm appear-animation delay-5">
+      <q-btn
+        outline
+        class="full-width outline"
+        :style="{ color: '#6b0111' }"
+        label="View on 2GIS"
+        @click="viewOn2gis"
+      />
+    </div>
+    <div
+      class="monsieur-la-doulaise-regular subtitle-size appear-animation delay-6 text-right"
+    >
+      with love, Dana
+    </div>
   </q-page>
 </template>
 
-
 <script setup>
-import { ref, onMounted,watch,reactive, provide, computed, inject } from 'vue'
-import Card from "../components/Card.vue"
-import Cardlist from "../components/Cardlist.vue"
-import axios from 'axios'
-const {mycart, addToCart, removeFromCart} = inject('mycart');
+import {
+  ref,
+  onMounted,
+  watch,
+  reactive,
+  provide,
+  computed,
+  inject,
+} from "vue";
+import axios from "axios";
+const typingText = ref(null);
+const typingAnimationDone = ref(false);
 
-const items = ref([])
-/*
-const model = ref(options[0])
-*/
-const sortOptions = computed(() => [
-  { label: 'По названию', value: 'name' },
-  { label: 'по цене (дешевые)', value: 'price' },
-  { label: 'по цене (дорогие)', value: '-price' }
-]);
-const filters = reactive({
-    sortBy: 'name',
-    searchQuery: ''
-  })
+const textToType = `You're invited to my bday!\n 
+Dress classy and fabulous for tiktoks, yapping, photos, and a cozy dinner.\n 
+I hope you can make it!`;
 
-const onSearch = event => {
-  filters.searchQuery = event.target.value
-  console.log(filters.searchQuery)
-}
-
-  const onClickAddPlus = async(item) =>{
-    try{
-      if(!item.isAdded){
-        addToCart(item)
-      } else{
-        removeFromCart(item)
-      }
-    } catch(err){console.log(err)}
+onMounted(() => {
+  if (typingText.value) {
+    startTyping();
   }
-
-  const addToFav = async(item) =>{
-    try{
-      if(!item.isFav){
-        const obj = {
-          itemId: item.id,
-          item
-        };
-        const {data:favs} = await axios.post('https://6e5e12b4bb07b2b5.mokky.dev/favs',obj);
-        item.isFav = true;
-        item.favId= data.id
-        console.log(data)
-      }else{
-        await axios.delete('https://6e5e12b4bb07b2b5.mokky.dev/favs/'+item.favId);
-        item.isFav = false;
-        item.favId = null;
-      }
-    }catch(err){console.log(err)}
-  }
-
-  const fetchFavs = async() => {
-    try{
-      const {data:favs} = await axios.get('https://6e5e12b4bb07b2b5.mokky.dev/favs');
-      items.value = items.value.map(item =>{
-        const fav = favs.find(fav => fav.itemId === item.id);
-        if(!fav){return item;}
-        return{
-          ...item,
-          isFav:true,
-          favId:fav.id
-
-        }
-      });
-
-
-    }catch(err){console.log(err)}
-  }
-
-  const fetchItems = async() =>{
-    try{
-      const params = {
-        sortBy: filters.sortBy,
-        searchQuery: filters.searchQuery
-      }
-      const {data} = await axios.get('https://6e5e12b4bb07b2b5.mokky.dev/items?sortBy='+filters.sortBy + '&title=*'+ filters.searchQuery +'*');
-      items.value = data.map(obj=>({
-        ...obj,
-        isFav:false,
-        isAdded:false,
-        favId:null,
-        cartIteId:null
-      }))
-
-
-    }catch(err){console.log(err)}
-  }
-
-const getBasePath = computed(() => {
-  return import.meta.env.MODE === 'production' ? '/quasar_sneakers' : '';
 });
 
-  onMounted(async()=>{
-    const localcart = localStorage.getItem('mycart')
-    mycart.value= localcart ? JSON.parse(localcart) : [];
-    await fetchItems();
-    await fetchFavs();
-    items.value = items.value.map((item) =>({
-      ...item,
-      isAdded:mycart.value.some((cartIte) =>cartIte.id === item.id)
-    }))
-  })
+function startTyping() {
+  let i = 0;
+  const speed = 50; // Adjust typing speed (milliseconds)
 
-  watch(mycart, () =>{
-    items.value= items.value.map((item)=>({
-      ...item,
-      isAdded:false
-    }))
-  })
+  function type() {
+    if (i < textToType.length) {
+      const currentText = textToType.slice(0, i + 1);
+      typingText.value.innerHTML =
+        currentText + '<span class="cursor">|</span>';
+      i++;
+      setTimeout(type, speed);
+    } else {
+      typingAnimationDone.value = true;
+    }
+  }
 
+  type();
+}
 
-  watch(filters, fetchItems);
+function addToCalendar() {
+  const eventDetails = {
+    title: "Dana's Birthday",
+    start: "20250208T180000",
+    end: "20250208T230000",
+    location: "Gasteria, Turan 22/1.",
+    description: "https://2gis.kz/astana/geo/70000001062012206",
+  };
+  const googleCalendarLink = generateGoogleCalendarLink(eventDetails);
+  window.open(googleCalendarLink, "_blank");
+}
 
+function generateGoogleCalendarLink(event) {
+  const baseUrl = "https://www.google.com/calendar/render?action=TEMPLATE";
+  const encodedTitle = encodeURIComponent(event.title);
+  const encodedStart = encodeURIComponent(event.start);
+  const encodedEnd = encodeURIComponent(event.end);
+  const encodedLocation = encodeURIComponent(event.location);
+  const encodedDetails = encodeURIComponent(event.description);
+  return `${baseUrl}&text=${encodedTitle}&dates=${encodedStart}/${encodedEnd}&location=${encodedLocation}&details=${encodedDetails}`;
+}
+
+function viewOn2gis() {
+  const locationLink = "https://2gis.kz/astana/geo/70000001062012206";
+  window.open(locationLink, "_blank");
+}
 </script>
 
+<style>
+.page-background {
+  background-size: cover;
+}
+@media (max-width: 430px) {
+  .page-background {
+    background-image: url("../assets/background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}
+
+.ballet-font {
+  font-family: "Ballet", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+.herr-font {
+  font-family: "Herr Von Muellerhoff", cursive;
+}
+.monsieur-la-doulaise-regular {
+  font-family: "Monsieur La Doulaise", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.rozha-one {
+  font-family: "Rozha One", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.title-size {
+  font-size: 4rem;
+}
+.subtitle-size {
+  font-size: 2rem;
+}
+
+.my-emoji {
+  max-width: 10em;
+  height: auto;
+  display: block;
+  margin: 5px;
+  float: right;
+}
+.typing-container {
+  margin: 0 auto;
+  text-align: left;
+}
+
+.typing-text {
+  white-space: pre-line;
+  margin: 0;
+  padding: 0;
+  min-height: 150px;
+}
+
+.cursor {
+  color: #6b0111;
+  animation: blink 0.75s step-end infinite;
+}
+
+@keyframes blink {
+  from,
+  to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.appear-animation {
+  opacity: 0;
+}
+
+.sequence-start .appear-animation {
+  animation: appear 1s ease forwards;
+}
+
+@keyframes appear {
+  to {
+    opacity: 1;
+  }
+}
+
+.sequence-start .delay-1 {
+  animation-delay: 0.8s;
+}
+.sequence-start .delay-2 {
+  animation-delay: 1.4s;
+}
+.sequence-start .delay-3 {
+  animation-delay: 2s;
+}
+.sequence-start .delay-4 {
+  animation-delay: 2.5s;
+}
+.sequence-start .delay-5 {
+  animation-delay: 3s;
+}
+.sequence-start .delay-6 {
+  animation-delay: 3.5s;
+}
+</style>
