@@ -10,7 +10,7 @@
     "test": "vitest",
     "dev": "quasar dev",
     "build": "quasar build",
-    "deploy": "gh-pages-clean gh-pages -d build"
+    "deploy": "gh-pages -d dist/spa"
   },
   "dependencies": {
     "@quasar/extras": "^1.16.4",
