@@ -5,6 +5,7 @@
   "productName": "Quasar App",
   "author": "Dana <dana.zhunussova04@gmail.com>",
   "private": true,
+  "homepage": "https://danazhunussova.github.io/quasar_sneakers",
   "scripts": {
     "test": "vitest",
     "dev": "quasar dev",
