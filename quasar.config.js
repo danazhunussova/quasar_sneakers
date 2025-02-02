@@ -53,7 +53,10 @@ module.exports = configure(function (/* ctx */) {
 
       vueRouterMode: 'hash', // available values: 'hash', 'history'
       
-      publicPath: "/quasar_sneakers/"
+      publicPath: "/quasar_sneakers/",
+      htmlVariables: {
+        base: "/quasar_sneakers/"
+      }
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,
