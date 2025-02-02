@@ -5,14 +5,15 @@
   >
     <div
       id="heart-cursor"
-      :style="{ left: cursorX - 15 + 'px', top: cursorY - 28 + 'px' }"
+      :style="{ left: cursorX + 'px', top: cursorY + 'px' }"
     >
       ♥
     </div>
     <div class="rozha-one">
       <div
         :style="{ color: '#6b0111' }"
-        class="text-h4 q-py-xl title-size monsieur-la-doulaise-regular"
+        class="text-h4 q-py-xl title-size appearanimation monsieur-la-doulaise-regular"
+        @animationend="startTypingWithDelay"
       >
         Hey gorgeous!
       </div>
@@ -25,15 +26,15 @@
       <div class="text-h6 q-py-sm appear-animation delay-1 q-mt-lg">
         <span :style="{ color: '#6b0111' }">💋 Here all the details ↓</span>
       </div>
-      <div class="appear-animation delay-2">
+      <div class="appear-animation delay-4">
         <img src="../assets/mymemoji.png" alt="My Emoji" class="my-emoji" />
       </div>
 
-      <div class="q-py-sm appear-animation delay-3">
+      <div class="q-py-sm appear-animation delay-2">
         <q-icon name="event" size="xs" class="q-mr-sm" />
         <span>February 8th, 6:00PM</span>
       </div>
-      <div class="q-py-sm appear-animation delay-4">
+      <div class="q-py-sm appear-animation delay-3">
         <q-icon name="place" size="xs" class="q-mr-sm" />
         <span>Gasteria, Turan 22/1</span>
       </div>
@@ -80,7 +81,13 @@ import axios from "axios";
 
 const cursorX = ref(0);
 const cursorY = ref(0);
-
+function startTypingWithDelay() {
+  setTimeout(() => {
+    if (typingText.value) {
+      startTyping();
+    }
+  }, 200); // 800ms delay after "Hey gorgeous!" animation ends
+}
 const handleTouchMove = (event) => {
   updateCursorPosition(event);
 };
@@ -112,12 +119,6 @@ const typingAnimationDone = ref(false);
 const textToType = `You're invited to my bday!\n 
 Dress classy and fabulous for tiktoks, yapping, photos, and a cozy dinner.\n 
 I hope you can make it!`;
-
-onMounted(() => {
-  if (typingText.value) {
-    startTyping();
-  }
-});
 
 function startTyping() {
   let i = 0;
@@ -248,6 +249,11 @@ function viewOn2gis() {
   }
 }
 
+.appearanimation {
+  opacity: 0;
+  animation: appear 2s ease forwards;
+}
+
 .appear-animation {
   opacity: 0;
 }
@@ -278,6 +284,6 @@ function viewOn2gis() {
   animation-delay: 3s;
 }
 .sequence-start .delay-6 {
-  animation-delay: 3.5s;
+  animation-delay: 3.7s;
 }
 </style>
