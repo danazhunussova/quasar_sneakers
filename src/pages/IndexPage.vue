@@ -3,6 +3,12 @@
     class="q-pa-xl page-background"
     :class="{ 'sequence-start': typingAnimationDone }"
   >
+    <div
+      id="heart-cursor"
+      :style="{ left: cursorX - 15 + 'px', top: cursorY - 28 + 'px' }"
+    >
+      ♥
+    </div>
     <div class="rozha-one">
       <div
         :style="{ color: '#6b0111' }"
@@ -68,8 +74,38 @@ import {
   provide,
   computed,
   inject,
+  onUnmounted,
 } from "vue";
 import axios from "axios";
+
+const cursorX = ref(0);
+const cursorY = ref(0);
+
+const handleTouchMove = (event) => {
+  updateCursorPosition(event);
+};
+
+const updateCursorPosition = (event) => {
+  if (event.touches.length > 0) {
+    cursorX.value = event.touches[0].clientX;
+    cursorY.value = event.touches[0].clientY;
+  }
+};
+
+const hideNativeCursor = () => {
+  document.body.style.cursor = "none";
+};
+
+onMounted(() => {
+  window.addEventListener("touchmove", handleTouchMove);
+  hideNativeCursor();
+});
+
+onUnmounted(() => {
+  window.removeEventListener("touchmove", handleTouchMove);
+  document.body.style.cursor = "";
+});
+
 const typingText = ref(null);
 const typingAnimationDone = ref(false);
 
@@ -140,6 +176,15 @@ function viewOn2gis() {
     background-size: cover;
     background-repeat: no-repeat;
   }
+}
+
+#heart-cursor {
+  position: fixed;
+  pointer-events: none;
+  font-size: 44px;
+  color: rgb(169, 32, 32);
+  z-index: 9999;
+  transition: transform 0.1s;
 }
 
 .ballet-font {
