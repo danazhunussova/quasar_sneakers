@@ -1,6 +1,9 @@
 // tests/setup.js
 import { config } from '@vue/test-utils';
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createMemoryHistory } from 'vue-router';
+import { Quasar } from 'quasar';
+
+// Import all needed Quasar components
 import {
   QLayout,
   QPageContainer,
@@ -21,8 +24,8 @@ import {
   QDialog
 } from 'quasar';
 
-// Register Quasar components globally
-config.global.components = {
+// Create object of Quasar components to register
+const components = {
   QLayout,
   QPageContainer,
   QPage,
@@ -42,10 +45,28 @@ config.global.components = {
   QDialog
 };
 
-// Set up Vue Router if used in your components
+// Register Quasar plugin
+config.global.plugins.push([
+  Quasar,
+  {
+    components
+  }
+]);
+
+// Set up Vue Router with memory history for testing
 const router = createRouter({
-  history: createWebHistory(),
+  history: createMemoryHistory(),
   routes: [] // Add your routes here if needed
 });
 
-config.global.plugins = [router];
+// Register router
+config.global.plugins.push(router);
+
+// Optional: Add any global mocks or stubs
+config.global.mocks = {
+  // Add any global mocks here
+};
+
+config.global.stubs = {
+  // Add any global stubs here
+};
